@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import Text from './components/Text'
+import Clock from './Clock'
 
 export default function App() {
   const printRef = useRef<HTMLDivElement>(null)
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <div className="flex items-center justify-center min-h-[100dvh] bg-slate-300  gap-2">
       <div className="w-[300px]">
+        <Clock />
         <Text text="STEP1：找出你最想問這本書的一個問題" delay={150} />
         <br />
         <Text text="STEP2：限時30分鐘快速摘出16個關鍵字" delay={150} />
@@ -25,7 +27,7 @@ export default function App() {
       <div className="flex flex-col items-center gap-2">
         <div ref={printRef}>
           <div className="grid bg-white grid-cols-5 w-[800px] h-[500px]  rounded-lg grid-rows-5 p-4 gap-2">
-            <div className="col-span-3 space-y-0.5">
+            <div className="col-span-3 space-y-1">
               <div className="flex items-center gap-2">
                 <Label className="w-12" htmlFor="book">
                   書名
