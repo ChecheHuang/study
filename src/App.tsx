@@ -6,16 +6,17 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import Text from './components/Text'
 import Clock from './Clock'
+import { ModeToggle } from './components/mode-toggle'
 
 export default function App() {
   const printRef = useRef<HTMLDivElement>(null)
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
   })
+
   return (
-    <div className="flex items-center justify-center min-h-[100dvh] bg-slate-300  gap-2">
-      <div className="w-[300px]">
-        <Clock />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-primary to-secondary p-4 md:flex-row md:p-2 md:gap-2">
+      <div className="max-w-md p-4  md:w-1/3 ">
         <Text text="STEP1：找出你最想問這本書的一個問題" delay={150} />
         <br />
         <Text text="STEP2：限時30分鐘快速摘出16個關鍵字" delay={150} />
@@ -24,57 +25,65 @@ export default function App() {
         <br />
         <Text text="STEP4：複述心得" delay={150} />
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center w-full max-w-4xl gap-2 md:w-2/3">
         <div ref={printRef}>
-          <div className="grid bg-white grid-cols-5 w-[800px] h-[500px]  rounded-lg grid-rows-5 p-4 gap-2">
-            <div className="col-span-3 space-y-1">
+          <div className="grid grid-cols-1 grid-rows-5 gap-2 bg-white rounded-lg opacity-80 p-4 sm:grid-cols-2 sm:grid-rows-3 md:grid-cols-5 md:grid-rows-5 md:w-full md:h-[500px]">
+            <div className="space-y-1 col-span-1 md:col-span-3">
               <div className="flex items-center gap-2">
-                <Label className="w-12" htmlFor="book">
+                <Label htmlFor="book" className="w-12 text-black">
                   書名
                 </Label>
                 <Input id="book" />
               </div>
               <div className="flex items-center gap-2">
-                <Label className="w-12" htmlFor="question">
+                <Label htmlFor="question" className="w-12 text-black">
                   問題
                 </Label>
                 <Input id="question" />
               </div>
               <div className="flex items-center gap-2">
-                <Label className="w-12" htmlFor="motivation">
+                <Label htmlFor="motivation" className="w-12 text-black">
                   動機
                 </Label>
                 <Input id="motivation" />
               </div>
             </div>
-            <div className="col-span-2">
+            {Array(16)
+              .fill('')
+              .map((_, index) => (
+                <Textarea
+                  placeholder={`關鍵字${index + 1}`}
+                  key={index}
+                  className="resize-none"
+                />
+              ))}
+            <div className="col-span-1 md:col-start-4 md:row-start-1 md:col-span-2">
               <div className="flex items-center gap-2">
-                <Label className="w-12" htmlFor="mainPoint">
+                <Label htmlFor="mainPoint" className="w-12 text-black">
                   要點
                 </Label>
                 <Textarea id="mainPoint" className="resize-none" />
               </div>
             </div>
-            <div className="row-start-2 col-start-5 row-span-2 flex gap-2 flex-col  ">
-              <Label className="w-12" htmlFor="aware">
+            <div className="flex flex-col gap-2 md:row-start-2 md:col-start-5 md:row-span-2">
+              <Label htmlFor="aware" className="w-12 text-black">
                 察覺點
               </Label>
-              <Textarea id="aware" className="resize-none flex-1 " />
+              <Textarea id="aware" className="resize-none flex-1" />
             </div>
-            <div className="row-start-4 col-start-5 row-span-2 flex gap-2 flex-col   ">
-              <Label className="w-12" htmlFor="summarize">
+            <div className="flex flex-col gap-2 md:row-start-4 md:col-start-5 md:row-span-2">
+              <Label htmlFor="summarize" className="w-12 text-black">
                 總結
               </Label>
-              <Textarea id="summarize" className="resize-none flex-1 " />
+              <Textarea id="summarize" className="resize-none flex-1" />
             </div>
-            {Array(16)
-              .fill('')
-              .map((_, index) => (
-                <Textarea key={index} className="resize-none" />
-              ))}
           </div>
         </div>
-        <Button onClick={handlePrint}>列印</Button>
+        <div className="flex gap-2">
+          <Clock />
+          <Button onClick={handlePrint}>列印</Button>
+          <ModeToggle />
+        </div>
       </div>
     </div>
   )
