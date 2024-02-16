@@ -1,7 +1,10 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+@page {
+  margin-top: 3cm;
+}
 
 @layer base {
   :root {

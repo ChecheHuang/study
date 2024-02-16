@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import Text from './components/Text'
 import Clock from './Clock'
 import { ModeToggle } from './components/mode-toggle'
+import { cn } from './lib/utils'
 
 export default function App() {
   const printRef = useRef<HTMLDivElement>(null)
@@ -25,9 +26,14 @@ export default function App() {
         <br />
         <Text text="STEP4：複述心得" delay={150} />
       </div>
-      <div className="flex flex-col items-center w-full max-w-4xl gap-2 md:w-2/3">
+      <div className="flex flex-col items-center w-full  max-w-4xl gap-2 md:w-2/3">
         <div ref={printRef}>
-          <div className="grid grid-cols-1 grid-rows-5 gap-2 bg-white rounded-lg opacity-80 p-4 sm:grid-cols-2 sm:grid-rows-3 md:grid-cols-5 md:grid-rows-5 md:w-full md:h-[500px]">
+          <div
+            className={cn(
+              'grid grid-cols-1 grid-rows-5 gap-2 bg-white rounded-lg opacity-80 p-4 sm:grid-cols-2 sm:grid-rows-3 md:grid-cols-5 md:grid-rows-5 md:w-full md:h-[500px]',
+              'aspect-[1.414/1] '
+            )}
+          >
             <div className="space-y-1 col-span-1 md:col-span-3">
               <div className="flex items-center gap-2">
                 <Label htmlFor="book" className="w-12 text-black">
