@@ -37,7 +37,7 @@ export default function App() {
             <div className="space-y-1 col-span-1 md:col-span-3">
               <div className="flex items-center gap-2">
                 <Label htmlFor="book" className="w-12 text-black">
-                  書名
+                  書本名
                 </Label>
                 <Input id="book" />
               </div>
